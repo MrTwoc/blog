@@ -1,9 +1,9 @@
 ---
 title: 第一篇博客
-published: 2024-04-01
-description: "How to use this blog template."
+published: 2026-03-06
+description: "博客测试."
 image: "./cover.webp"
-tags: ["Mizuki", "Blogging", "Customization"]
+tags: ["测试"]
 category: Guides
 draft: false
 ---
