@@ -1,0 +1,10 @@
+{
+    "title": "我的相册",
+    "cover": "",
+    "photos": [
+        {
+            "src": "https://cdn.nlark.com/yuque/0/2026/png/1295434/1772868957581-8e485d4d-32d5-4f63-9160-fb3ca91e25b1.png",
+            "alt": "图片描述"
+        }
+    ]
+}
