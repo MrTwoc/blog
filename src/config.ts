@@ -291,7 +291,7 @@ export const navBarConfig: NavBarConfig = {
 			icon: "material-symbols:info",
 			children: [
 				{
-					name: "About",
+					name: "关于我",
 					url: "/about/",
 					icon: "material-symbols:person",
 				},
@@ -309,7 +309,7 @@ export const navBarConfig: NavBarConfig = {
 export const profileConfig: ProfileConfig = {
 	avatar: "assets/images/Me.webp", // 相对于 /src 目录。如果以 '/' 开头，则相对于 /public 目录
 	name: "Twoc-Prime",
-	bio: "loop{Rust入门中。。}",
+	bio: "loop{Rust入门中。。} ",
 	typewriter: {
 		enable: false, // 启用个人简介打字机效果
 		speed: 80, // 打字速度（毫秒）
