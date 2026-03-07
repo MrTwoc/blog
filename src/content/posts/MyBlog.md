@@ -2,7 +2,7 @@
 title: 第一篇博客
 published: 2026-03-06
 description: "博客测试."
-image: "./cover.webp"
+# image: "./cover.webp"
 tags: ["测试"]
 category: blog
 draft: false

@@ -23,7 +23,7 @@ const SITE_LANG = "zh_CN"; // 语言代码，例如：'en', 'zh_CN', 'ja' 等。
 const SITE_TIMEZONE = 8; //设置你的网站时区 from -12 to 12 default in UTC+8
 export const siteConfig: SiteConfig = {
 	title: "MrTwoc",
-	subtitle: "他的个人博客",
+	subtitle: "我的个人博客",
 	siteURL: "https://mizuki.mysqil.com/", // 请替换为你的站点URL，以斜杠结尾
 	siteStartDate: "2026-02-20", // 站点开始运行日期，用于站点统计组件计算运行天数
 
@@ -39,13 +39,13 @@ export const siteConfig: SiteConfig = {
 	// 特色页面开关配置（关闭未使用的页面有助于提升 SEO，关闭后请记得在 navbarConfig 中移除对应链接）
 	featurePages: {
 		anime: false, // 番剧页面开关
-		diary: true, // 日记页面开关
+		diary: false, // 日记页面开关
 		friends: true, // 友链页面开关
-		projects: true, // 项目页面开关
-		skills: true, // 技能页面开关
+		projects: false, // 项目页面开关
+		skills: false, // 技能页面开关
 		timeline: true, // 时间线页面开关
 		albums: true, // 相册页面开关
-		devices: true, // 设备页面开关
+		devices: false, // 设备页面开关
 	},
 
 	// 顶栏标题配置
@@ -235,88 +235,53 @@ export const siteConfig: SiteConfig = {
 export const fullscreenWallpaperConfig: FullscreenWallpaperConfig = {
 	src: {
 		desktop: [
-			"/assets/desktop-banner/1.webp",
-			"/assets/desktop-banner/2.webp",
-			"/assets/desktop-banner/3.webp",
-			"/assets/desktop-banner/4.webp",
-			"/assets/desktop-banner/5.webp",
-			"/assets/desktop-banner/6.webp",
-		], // 桌面横幅图片
+			"/images/test.webp",  // xLog风格：使用单张简约图片
+		],
 		mobile: [
-			"/assets/mobile-banner/1.webp",
-			"/assets/mobile-banner/2.webp",
-			"/assets/mobile-banner/3.webp",
-			"/assets/mobile-banner/4.webp",
-			"/assets/mobile-banner/5.webp",
-			"/assets/mobile-banner/6.webp",
-		], // 移动横幅图片
-	}, // 使用本地横幅图片
-	position: "center", // 壁纸位置，等同于 object-position
-	carousel: {
-		enable: false, // 启用轮播
-		interval: 5, // 轮播间隔时间（秒）
+			"/images/test.webp",  // 移动端使用同一张图片
+		],
 	},
-	zIndex: -1, // 层级，确保壁纸在背景层
-	opacity: 0.8, // 壁纸透明度
-	blur: 1, // 背景模糊程度
+	position: "center",
+	carousel: {
+		enable: false,  // 禁用轮播，保持简约
+		interval: 5,
+	},
+	zIndex: -1,
+	opacity: 0.6,  // 降低透明度，更简约
+	blur: 2,       // 增加轻微模糊效果
 };
 
 export const navBarConfig: NavBarConfig = {
 	links: [
 		LinkPreset.Home,
 		LinkPreset.Archive,
-		// 支持自定义导航栏链接，支持多级菜单
-		{
-			name: "Links",
-			url: "/links/",
-			icon: "material-symbols:link",
-			children: [
-				{
-					name: "GitHub",
-					url: "https://github.com/matsuzaka-yuki/Mizuki",
-					external: true,
-					icon: "fa7-brands:github",
-				},
-				{
-					name: "Bilibili",
-					url: "https://space.bilibili.com/701864046",
-					external: true,
-					icon: "fa7-brands:bilibili",
-				},
-				{
-					name: "Gitee",
-					url: "https://gitee.com/matsuzakayuki/Mizuki",
-					external: true,
-					icon: "mdi:git",
-				},
-			],
-		},
+		// 移除了 Links 下拉菜单
 		{
 			name: "My",
 			url: "/content/",
 			icon: "material-symbols:person",
 			children: [
-				{
-					name: "Anime",
-					url: "/anime/",
-					icon: "material-symbols:movie",
-				},
-				{
-					name: "Diary",
-					url: "/diary/",
-					icon: "material-symbols:book",
-				},
+				// {
+				// 	name: "Anime",
+				// 	url: "/anime/",
+				// 	icon: "material-symbols:movie",
+				// },
+				// {
+				// 	name: "Diary",
+				// 	url: "/diary/",
+				// 	icon: "material-symbols:book",
+				// },
 				{
 					name: "Gallery",
 					url: "/albums/",
 					icon: "material-symbols:photo-library",
 				},
-				{
-					name: "Devices",
-					url: "devices/",
-					icon: "material-symbols:devices",
-					external: false,
-				},
+				// {
+				// 	name: "Devices",
+				// 	url: "devices/",
+				// 	icon: "material-symbols:devices",
+				// 	external: false,
+				// },
 			],
 		},
 		{
@@ -336,35 +301,14 @@ export const navBarConfig: NavBarConfig = {
 				},
 			],
 		},
-		{
-			name: "Others",
-			url: "#",
-			icon: "material-symbols:more-horiz",
-			children: [
-				{
-					name: "Projects",
-					url: "/projects/",
-					icon: "material-symbols:work",
-				},
-				{
-					name: "Skills",
-					url: "/skills/",
-					icon: "material-symbols:psychology",
-				},
-				{
-					name: "Timeline",
-					url: "/timeline/",
-					icon: "material-symbols:timeline",
-				},
-			],
-		},
+		// 移除了 Others 下拉菜单
 	],
 };
 
 export const profileConfig: ProfileConfig = {
 	avatar: "assets/images/Me.webp", // 相对于 /src 目录。如果以 '/' 开头，则相对于 /public 目录
 	name: "Twoc-Prime",
-	bio: "三界大魔皆拱手，十方外道悉皆皈依",
+	bio: "loop{Rust入门中。。}",
 	typewriter: {
 		enable: false, // 启用个人简介打字机效果
 		speed: 80, // 打字速度（毫秒）
