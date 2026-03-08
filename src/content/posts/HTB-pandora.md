@@ -1,10 +1,10 @@
 ---
-title: HTB-Pandora
-published: 2022-04-08
+title: 记模拟渗透-HTB-Pandora
+published: 2022-04-09
 description: "Hack The Box Pandora Writeup."
 # image: "./cover.webp"
-tags: ["测试"]
-category: blog
+tags: ["网络安全","Hack The Box", "靶场"]
+category: 网络安全
 draft: false
 ---
 
