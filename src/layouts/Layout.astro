@@ -404,6 +404,16 @@ if (siteConfig.font) {
 
 		<!-- increase the page height during page transition to prevent the scrolling animation from jumping -->
 		<div id="page-height-extend" class="hidden h-[300vh]"></div>
+		<script>
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('img').forEach(img => {
+    img.referrerPolicy = 'no-referrer'
+  })
+})
+</script>
+
+</body>
+</html>
 	</body>
 </html>
 
