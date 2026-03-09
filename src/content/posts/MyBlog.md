@@ -3,6 +3,7 @@ title: 第一篇博客
 published: 2026-03-06
 description: "博客测试."
 # image: "./cover.webp"
+# image: "https://cdn.nlark.com/yuque/0/2023/png/1295434/1686841747533-9e2f84ea-4d55-4b22-ae38-899031bd0afd.png"
 tags: ["测试"]
 category: blog
 draft: false

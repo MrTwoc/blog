@@ -1,9 +1,15 @@
 {
     "mode": "external",
     "title": "大明湖及周边",
-    "cover": "https://github.com/MrTwoc/blog/blob/master/public/images/albums/Twoc-img/cover.jpg",
+    "description": "大明湖、护城河、解放阁、省博",
+    "cover": "https://cdn.nlark.com/yuque/0/2026/jpeg/1295434/1772975306319-764cea5c-c3ce-4f4a-b655-07a7632b864e.jpeg",
     "layout": "masonry",
     "columns": 3,
+    "tags": [
+        "大明湖",
+        "护城河",
+        "解放阁"
+    ],
     "photos": [
         {
             "src": "https://cdn.nlark.com/yuque/0/2026/jpeg/1295434/1772975306319-764cea5c-c3ce-4f4a-b655-07a7632b864e.jpeg",
