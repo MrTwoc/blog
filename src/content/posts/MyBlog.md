@@ -1,10 +1,10 @@
 ---
-title: 第一篇博客
+title: Hello World! (2026-03-06)
 published: 2026-03-06
-description: "博客测试."
+description: "缘起-2026年3月6日，这是新博客."
 # image: "./cover.webp"
 # image: "https://cdn.nlark.com/yuque/0/2023/png/1295434/1686841747533-9e2f84ea-4d55-4b22-ae38-899031bd0afd.png"
-tags: ["测试"]
+tags: ["博客"]
 category: blog
 draft: false
 ---

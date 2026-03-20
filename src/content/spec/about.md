@@ -9,6 +9,8 @@ Github: [MrTwoc](https://github.com/MrTwoc)
 Email: mrtwoc@qq.com  
 正在涉及与爱好方向：  
 Rust语言、操作系统开发、游戏开发  
+玩过的游戏：
+CS、魔兽世界、Minecraft、Warframe、L4D2
 
 
 ima知识库：[Rust]Bevy&区块链 [https://ima.qq.com/wiki/?shareId=c98d6738319dc1404fe23c0cb183ec8d94b332a2751a5028088c24268b6cb950](https://ima.qq.com/wiki/?shareId=c98d6738319dc1404fe23c0cb183ec8d94b332a2751a5028088c24268b6cb950)
