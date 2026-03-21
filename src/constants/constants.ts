@@ -16,7 +16,7 @@ export const MAIN_PANEL_OVERLAPS_BANNER_HEIGHT = 3.5;
 export const PAGE_WIDTH = 90;
 
 // Category constants
-export const UNCATEGORIZED = "uncategorized";
+export const UNCATEGORIZED = "未分类";
 
 // Wallpaper mode constants
 export const WALLPAPER_BANNER = "banner";
