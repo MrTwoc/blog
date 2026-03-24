@@ -96,6 +96,19 @@ export const siteConfig: SiteConfig = {
 		defaultMode: "list",
 		// 是否允许用户切换布局
 		allowSwitch: true,
+		// 分类导航配置
+		categoryNav: {
+			// 是否启用分类导航
+			enable: true,
+			// 要排除的分类名称数组（在此列出的分类将不显示在导航栏）
+			// 例如：["其他", "未分类"]
+			exclude: ["blog"],
+			// 分类显示顺序，数组中的顺序即为显示顺序（未被包含的分类将按默认规则排在后面）
+			// 例如：["网络安全", "blog"] - 网络安全排第一，blog 排第二
+			order: ["网络安全"],
+			// 是否显示文章数量
+			showCount: false,
+		},
 	},
 
 	// 标签样式配置

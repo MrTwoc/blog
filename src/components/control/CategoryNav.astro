@@ -1,0 +1,93 @@
+---
+import { getCategoryList } from "@utils/content-utils";
+import { getCategoryUrl } from "@utils/url-utils";
+import { siteConfig } from "../../config";
+
+interface Category {
+	name: string;
+	count: number;
+	url: string;
+}
+
+const allCategories: Category[] = await getCategoryList();
+
+const categoryNavConfig = siteConfig.postListLayout?.categoryNav;
+const excludeCategories = categoryNavConfig?.exclude || [];
+const showCount = categoryNavConfig?.showCount !== false;
+const order = categoryNavConfig?.order || [];
+
+// 过滤分类
+let categories = allCategories.filter(
+	(c) => !excludeCategories.includes(c.name.trim())
+);
+
+// 如果配置了 order，按 order 排序；未配置的分类按默认顺序排在后面
+if (order.length > 0) {
+	categories = categories.sort((a, b) => {
+		const indexA = order.indexOf(a.name.trim());
+		const indexB = order.indexOf(b.name.trim());
+		// 如果都不在 order 中，保持相对顺序
+		if (indexA === -1 && indexB === -1) return 0;
+		// a 在 order 中，b 不在，a 排前面
+		if (indexA !== -1 && indexB === -1) return -1;
+		// a 不在 order 中，b 在，b 排前面
+		if (indexA === -1 && indexB !== -1) return 1;
+		// 都在 order 中，按 order 索引排序
+		return indexA - indexB;
+	});
+}
+
+const currentCategory = Astro.url.searchParams.get("category");
+const isArchivePage = Astro.url.pathname.includes("/archive");
+
+if (!categoryNavConfig?.enable || categories.length === 0) {
+	return;
+}
+---
+
+<div class="category-nav onload-animation rounded-[var(--radius-large)] bg-[var(--card-bg)] py-3 px-4 mb-4">
+	<div class="flex flex-wrap gap-2">
+	<a
+		href="/"
+		class:list={[
+			"px-4 py-2 rounded-lg text-sm font-bold transition-all duration-200",
+			!currentCategory
+				? "bg-[var(--primary)] text-white dark:text-black"
+				: "text-90 bg-[var(--btn-plain-bg)] hover:bg-[var(--primary)] hover:text-white dark:hover:text-black active:scale-95",
+		]}
+	>
+		全部
+	</a>
+	{categories.map((c) => (
+		<a
+			href={isArchivePage ? getCategoryUrl(c.name) : `/archive/?category=${encodeURIComponent(c.name.trim())}`}
+			class:list={[
+				"px-4 py-2 rounded-lg text-sm font-bold transition-all duration-200 flex items-center gap-2 active:scale-95",
+				currentCategory === c.name.trim()
+					? "bg-[var(--primary)] text-white dark:text-black"
+					: "text-90 bg-[var(--btn-plain-bg)] hover:bg-[var(--primary)] hover:text-white dark:hover:text-black",
+			]}
+		>
+			{c.name.trim()}
+			{showCount && (
+				<span
+					class:list={[
+						"text-xs px-1.5 py-0.5 rounded transition-all duration-200",
+						currentCategory === c.name.trim()
+							? "bg-white/20 text-white dark:text-black"
+							: "bg-[var(--btn-plain-bg-hover)] dark:bg-white/10 text-[var(--text-light)] hover:bg-white/20 hover:text-white dark:hover:text-black",
+					]}
+				>
+					{c.count}
+				</span>
+			)}
+		</a>
+	))}
+	</div>
+</div>
+
+<style>
+	.category-nav {
+		animation-delay: var(--content-delay, 100ms);
+	}
+</style>

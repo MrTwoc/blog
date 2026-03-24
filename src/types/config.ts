@@ -73,6 +73,13 @@ export type SiteConfig = {
 	postListLayout: {
 		defaultMode: "list" | "grid"; // 默认布局模式：list=列表模式，grid=网格模式
 		allowSwitch: boolean; // 是否允许用户切换布局
+		// 分类导航配置
+		categoryNav?: {
+			enable: boolean; // 是否启用分类导航
+			exclude?: string[]; // 要排除的分类名称数组
+			order?: string[]; // 分类显示顺序，数组中的顺序即为显示顺序
+			showCount?: boolean; // 是否显示文章数量
+		};
 	};
 
 	// 顶栏标题配置
