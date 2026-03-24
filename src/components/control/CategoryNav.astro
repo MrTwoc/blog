@@ -2,6 +2,7 @@
 import { getCategoryList } from "@utils/content-utils";
 import { getCategoryUrl } from "@utils/url-utils";
 import { siteConfig } from "../../config";
+import { Icon } from "astro-icon/components";
 
 interface Category {
 	name: string;
@@ -16,78 +17,210 @@ const excludeCategories = categoryNavConfig?.exclude || [];
 const showCount = categoryNavConfig?.showCount !== false;
 const order = categoryNavConfig?.order || [];
 
-// 过滤分类
 let categories = allCategories.filter(
 	(c) => !excludeCategories.includes(c.name.trim())
 );
 
-// 如果配置了 order，按 order 排序；未配置的分类按默认顺序排在后面
 if (order.length > 0) {
 	categories = categories.sort((a, b) => {
 		const indexA = order.indexOf(a.name.trim());
 		const indexB = order.indexOf(b.name.trim());
-		// 如果都不在 order 中，保持相对顺序
 		if (indexA === -1 && indexB === -1) return 0;
-		// a 在 order 中，b 不在，a 排前面
 		if (indexA !== -1 && indexB === -1) return -1;
-		// a 不在 order 中，b 在，b 排前面
 		if (indexA === -1 && indexB !== -1) return 1;
-		// 都在 order 中，按 order 索引排序
 		return indexA - indexB;
 	});
 }
 
-const currentCategory = Astro.url.searchParams.get("category");
 const isArchivePage = Astro.url.pathname.includes("/archive");
+const allUrl = "/"
 
 if (!categoryNavConfig?.enable || categories.length === 0) {
 	return;
 }
 ---
-
-<div class="category-nav onload-animation rounded-[var(--radius-large)] bg-[var(--card-bg)] py-3 px-4 mb-4">
-	<div class="flex flex-wrap gap-2">
-	<a
-		href="/"
-		class:list={[
-			"px-4 py-2 rounded-lg text-sm font-bold transition-all duration-200",
-			!currentCategory
-				? "bg-[var(--primary)] text-white dark:text-black"
-				: "text-90 bg-[var(--btn-plain-bg)] hover:bg-[var(--primary)] hover:text-white dark:hover:text-black active:scale-95",
-		]}
-	>
-		全部
-	</a>
-	{categories.map((c) => (
+<div
+	class="category-nav card-base onload-animation rounded-[var(--radius-large)] p-3 mb-4"
+	id="category-nav"
+>
+	<div class="category-nav-inner flex gap-2 items-center">
 		<a
-			href={isArchivePage ? getCategoryUrl(c.name) : `/archive/?category=${encodeURIComponent(c.name.trim())}`}
-			class:list={[
-				"px-4 py-2 rounded-lg text-sm font-bold transition-all duration-200 flex items-center gap-2 active:scale-95",
-				currentCategory === c.name.trim()
-					? "bg-[var(--primary)] text-white dark:text-black"
-					: "text-90 bg-[var(--btn-plain-bg)] hover:bg-[var(--primary)] hover:text-white dark:hover:text-black",
-			]}
+			href={allUrl}
+			class="category-pill text-sm px-3 py-1.5 rounded-lg flex-shrink-0 transition-colors duration-200 flex items-center justify-center"
+			data-category-name=""
 		>
-			{c.name.trim()}
-			{showCount && (
-				<span
-					class:list={[
-						"text-xs px-1.5 py-0.5 rounded transition-all duration-200",
-						currentCategory === c.name.trim()
-							? "bg-white/20 text-white dark:text-black"
-							: "bg-[var(--btn-plain-bg-hover)] dark:bg-white/10 text-[var(--text-light)] hover:bg-white/20 hover:text-white dark:hover:text-black",
-					]}
-				>
-					{c.count}
-				</span>
-			)}
+			<Icon name="material-symbols:home" class="text-lg mr-1" />
+			首页
 		</a>
-	))}
+		<div class="category-divider flex-shrink-0"></div>
+		<div class="scroll-area relative flex-1 min-w-0">
+			<div class="scroll-fade scroll-fade-left" aria-hidden="true"></div>
+			<div class="category-scroll flex gap-2 overflow-x-auto">
+				{categories.map((c) => {
+					return (
+					<a
+						href={isArchivePage ? getCategoryUrl(c.name) : `/archive/?category=${encodeURIComponent(c.name.trim())}`}
+						class="category-pill text-sm px-3 py-1.5 rounded-lg whitespace-nowrap flex-shrink-0 transition-colors duration-200 flex items-center justify-center"
+						data-category={c.name.trim()}
+					>
+						{c.name.trim()}
+						{showCount && (
+							<span class="text-xs opacity-60 ml-1">
+								{c.count}
+							</span>
+						)}
+					</a>
+					);
+				})}
+			</div>
+			<div class="scroll-fade scroll-fade-right" aria-hidden="true"></div>
+		</div>
 	</div>
 </div>
 
 <style>
-	.category-nav {
-		animation-delay: var(--content-delay, 100ms);
+	.category-divider {
+		width: 1px;
+		align-self: stretch;
+		background: var(--line-divider);
+	}
+	.scroll-area {
+		position: relative;
+	}
+	.scroll-fade {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		width: 2.5rem;
+		pointer-events: none;
+		opacity: 0;
+		transition: opacity 300ms ease-in-out;
+		z-index: 1;
+	}
+	.scroll-fade[data-visible] {
+		opacity: 1;
+	}
+	.scroll-fade-left {
+		left: 0;
+		background: linear-gradient(to left, transparent, var(--card-bg));
+	}
+	.scroll-fade-right {
+		right: 0;
+		background: linear-gradient(to right, transparent, var(--card-bg));
+	}
+	:global(body.wallpaper-transparent) .scroll-fade {
+		display: none;
+	}
+	.category-scroll {
+		scrollbar-width: none;
+		-ms-overflow-style: none;
+		scroll-behavior: smooth;
+	}
+	.category-scroll::-webkit-scrollbar {
+		display: none;
+	}
+	.category-pill {
+		border: 1.5px solid var(--line-divider);
+		color: var(--btn-content);
+		background: transparent;
+	}
+	.category-pill:hover {
+		border-color: var(--primary);
+		color: var(--primary);
+		background: transparent;
+	}
+	.category-pill[data-active="true"] {
+		background: var(--primary) !important;
+		border-color: var(--primary) !important;
+		color: white !important;
+	}
+	.category-pill[data-active="true"]:hover {
+		background: var(--primary) !important;
+		border-color: var(--primary) !important;
+		opacity: 0.9;
 	}
 </style>
+<script>
+	function updateCategoryNavHighlight() {
+		const nav = document.getElementById("category-nav");
+		if (!nav) return;
+
+		const params = new URLSearchParams(window.location.search);
+		const currentCategory = params.get("category");
+		const pathname = window.location.pathname.replace(/\/$/, "");
+		const isHome = pathname === "" || pathname === "/";
+
+		const allBtn = nav.querySelector('.category-pill[data-category-name=""]');
+		const categoryBtns = nav.querySelectorAll('.category-pill[data-category]');
+
+		if (allBtn) {
+			allBtn.setAttribute("data-active", (!currentCategory && isHome).toString());
+		}
+
+		categoryBtns.forEach(btn => {
+			const categoryName = btn.getAttribute("data-category");
+			const isActive = categoryName === currentCategory;
+			btn.setAttribute("data-active", isActive.toString());
+		});
+
+		updateScrollHint();
+	}
+
+	function initScrollFeatures() {
+		const nav = document.getElementById("category-nav");
+		if (!nav) return;
+
+		const scroll = nav.querySelector('.category-scroll') as HTMLElement;
+		if (!scroll) return;
+
+		scroll.addEventListener(
+			"wheel",
+			(e) => {
+				if (scroll.scrollWidth <= scroll.clientWidth) return;
+				e.preventDefault();
+				scroll.scrollLeft += e.deltaY;
+			},
+			{ passive: false }
+		);
+
+		scroll.addEventListener("scroll", updateScrollHint);
+		window.addEventListener("resize", updateScrollHint);
+		updateScrollHint();
+	}
+
+	function updateScrollHint() {
+		const nav = document.getElementById("category-nav");
+		if (!nav) return;
+		const scroll = nav.querySelector('.category-scroll') as HTMLElement;
+		const fadeLeft = nav.querySelector('.scroll-fade-left');
+		const fadeRight = nav.querySelector('.scroll-fade-right');
+		if (!scroll || !fadeLeft || !fadeRight) return;
+
+		const hasOverflow = scroll.scrollWidth > scroll.clientWidth + 1;
+		const atStart = scroll.scrollLeft <= 1;
+		const atEnd = scroll.scrollLeft + scroll.clientWidth >= scroll.scrollWidth - 1;
+
+		if (hasOverflow && !atStart) {
+			fadeLeft.setAttribute("data-visible", "");
+		} else {
+			fadeLeft.removeAttribute("data-visible");
+		}
+
+		if (hasOverflow && !atEnd) {
+			fadeRight.setAttribute("data-visible", "");
+		} else {
+			fadeRight.removeAttribute("data-visible");
+		}
+	}
+
+	updateCategoryNavHighlight();
+	initScrollFeatures();
+
+	if (typeof window !== 'undefined') {
+		document.addEventListener('astro:page-load', () => {
+			updateCategoryNavHighlight();
+			initScrollFeatures();
+		});
+		document.addEventListener('swup:contentReplaced', updateCategoryNavHighlight);
+	}
+</script>

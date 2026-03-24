@@ -1,5 +1,6 @@
 ---
 import ArchivePanel from "@components/ArchivePanel.svelte";
+import CategoryNav from "@components/control/CategoryNav.astro";
 import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
 import MainGridLayout from "@layouts/MainGridLayout.astro";
@@ -28,6 +29,9 @@ const categories = [...new Set(posts.map(post => post.data.category).filter((c):
     <script>
         import('../scripts/right-sidebar-layout.js');
     </script>
+
+    <!-- 分类导航栏 -->
+    <CategoryNav />
 
     <!-- 修复：补全缺失的 tags 和 categories 属性 -->
     <ArchivePanel
