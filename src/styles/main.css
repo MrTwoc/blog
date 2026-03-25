@@ -711,6 +711,18 @@ html {
   gap: 1rem;
 }
 
+/* 横幅底部渐变效果 - 让图片底部逐渐变透明 */
+#banner-wrapper img {
+  mask-image: linear-gradient(to bottom, black 0%, black 60%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 60%, transparent 100%);
+}
+
+/* 轮播模式下的横幅渐变 */
+#banner-carousel img {
+  mask-image: linear-gradient(to bottom, black 0%, black 60%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 60%, transparent 100%);
+}
+
 /* 确保过渡动画平滑 */
 .post-list-container {
   transition: all 0.3s ease-in-out;
