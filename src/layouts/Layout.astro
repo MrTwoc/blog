@@ -429,12 +429,12 @@ if (siteConfig.font) {
       mutations.forEach(function(mutation) {
         mutation.addedNodes.forEach(function(node) {
           if (node.nodeType === 1) { // Element node
-            if (node.tagName === 'IMG') {
-              processImage(node);
+            const element = node as Element;
+            if (element.tagName === 'IMG') {
+              processImage(element as HTMLImageElement);
             }
-            // 处理包含图片的容器
-            if (node.querySelectorAll) {
-              node.querySelectorAll('img').forEach(processImage);
+            if (element.querySelectorAll) {
+              element.querySelectorAll('img').forEach(processImage);
             }
           }
         });
