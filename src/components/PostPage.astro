@@ -4,6 +4,7 @@ import type { Page } from "astro";
 import { siteConfig } from "../config";
 import { widgetManager } from "../utils/widget-manager";
 import PostCard from "./PostCard.astro";
+import CategoryNav from "./control/CategoryNav.astro";
 
 interface Props {
 	page: Page<CollectionEntry<"posts">>;
@@ -20,6 +21,8 @@ const hasRightSidebars =
 const defaultLayout = siteConfig.postListLayout.defaultMode || "list";
 const initialLayoutClass = defaultLayout === "grid" ? "grid-mode" : "list-mode";
 ---
+
+<CategoryNav />
 
 <div
 	id="post-list-container"

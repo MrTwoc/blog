@@ -1,0 +1,18 @@
+{
+    "mode": "external",
+    "title": "Rust 学习",
+    "description": "Rust 学习记录",
+    "cover": "https://cdn.nlark.com/yuque/0/2026/png/1295434/1773147312633-673c519d-79ff-4d9e-9371-6f5f2ac1dc71.png",
+    "layout": "masonry",
+    "columns": 3,
+    "tags": [
+        "训练营",
+        "Rust"
+    ],
+    "photos": [
+        {
+            "src": "https://cdn.nlark.com/yuque/0/2026/png/1295434/1773147312633-673c519d-79ff-4d9e-9371-6f5f2ac1dc71.png",
+            "alt": "图片描述"
+        }
+    ]
+}

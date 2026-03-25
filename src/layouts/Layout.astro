@@ -404,6 +404,82 @@ if (siteConfig.font) {
 
 		<!-- increase the page height during page transition to prevent the scrolling animation from jumping -->
 		<div id="page-height-extend" class="hidden h-[300vh]"></div>
+		<script>
+// 设置图片 referrerpolicy 的完整解决方案
+(function() {
+  function setImageReferrerPolicy() {
+    // 设置所有已存在的图片
+    document.querySelectorAll('img').forEach(img => {
+      // 检查是否是外部图片（特别是语雀、B站等）
+      const src = img.src || '';
+      const isExternal = src.startsWith('http') && !src.includes(window.location.hostname);
+      const isYuqueImage = src.includes('yuque.com') || src.includes('nlark.com');
+      const isBilibiliImage = src.includes('hdslb.com');
+      
+      if (isExternal || isYuqueImage || isBilibiliImage) {
+        img.setAttribute('referrerpolicy', 'no-referrer');
+        img.setAttribute('crossorigin', 'anonymous');
+      }
+    });
+  }
+  
+  // 监听新添加的图片1
+  function observeImages() {
+    const observer = new MutationObserver(function(mutations) {
+      mutations.forEach(function(mutation) {
+        mutation.addedNodes.forEach(function(node) {
+          if (node.nodeType === 1) { // Element node
+            const element = node as Element;
+            if (element.tagName === 'IMG') {
+              processImage(element as HTMLImageElement);
+            }
+            if (element.querySelectorAll) {
+              element.querySelectorAll('img').forEach(processImage);
+            }
+          }
+        });
+      });
+    });
+    
+    function processImage(img) {
+      const src = img.src || '';
+      const isExternal = src.startsWith('http') && !src.includes(window.location.hostname);
+      const isYuqueImage = src.includes('yuque.com') || src.includes('nlark.com');
+      const isBilibiliImage = src.includes('hdslb.com');
+      
+      if (isExternal || isYuqueImage || isBilibiliImage) {
+        img.setAttribute('referrerpolicy', 'no-referrer');
+        img.setAttribute('crossorigin', 'anonymous');
+      }
+    }
+    
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
+  }
+  
+  // 立即执行
+  setImageReferrerPolicy();
+  
+  // DOM 加载完成后再次执行
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setImageReferrerPolicy);
+  }
+  
+  // 页面加载完成后执行
+  window.addEventListener('load', setImageReferrerPolicy);
+  
+  // 启动 MutationObserver
+  observeImages();
+  
+  // 针对 AJAX 加载的内容
+  document.addEventListener('swup:page:view', setImageReferrerPolicy);
+})();
+</script>
+
+</body>
+</html>
 	</body>
 </html>
 
