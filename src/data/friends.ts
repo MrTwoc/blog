@@ -23,7 +23,7 @@ export const friendsData: FriendItem[] = [
 	{
 		id: 2,
 		title: "Mizuki Docs",
-		imgurl: "http://q.qlogo.cn/headimg_dl?dst_uin=3231515355&spec=640&img_type=jpg",
+		imgurl: "https://avatars.githubusercontent.com/u/65413656?s=200",
 		desc: "Mizuki User Manual",
 		siteurl: "https://docs.mizuki.mysqil.com",
 		tags: ["Docs"],
@@ -79,7 +79,7 @@ export const friendsData: FriendItem[] = [
 	{
 		id: 8,
 		title: "哔哩哔哩",
-		imgurl: "https://www.bilibili.com/favicon.ico",
+		imgurl: "https://i0.hdslb.com/bfs/archive/1c4abc66e3de5552d5f4c168f2ef7976c13b460c.png@96w_96h_1c_!web-search-keyword-cover.webp",
 		desc: "哔哩哔哩 (bilibili) 是年轻人的文化社区和视频平台",
 		siteurl: "https://www.bilibili.com",
 		tags: ["视频", "社区", "娱乐"],
@@ -87,7 +87,7 @@ export const friendsData: FriendItem[] = [
 	{
 		id: 9,
 		title: "Rust",
-		imgurl: "https://www.rust-lang.org/static/images/rust-logo-blk.svg",
+		imgurl: "https://raw.githubusercontent.com/rust-lang/rust/master/src/etc/gfx/rust-logo-512.png",
 		desc: "Rust 编程语言官方网站",
 		siteurl: "https://rust-lang.org/zh-CN/",
 		tags: ["编程语言", "系统编程", "Rust"],
