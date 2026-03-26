@@ -371,9 +371,6 @@ const jsonLd = {
                 data-year={i18n(I18nKey.year)}
                 data-month={i18n(I18nKey.month)}
                 data-day={i18n(I18nKey.day)}
-                data-hour={i18n(I18nKey.hour)}
-                data-minute={i18n(I18nKey.minute)}
-                data-second={i18n(I18nKey.second)}
                 style="display: none;"
             ></div>
 
@@ -381,54 +378,23 @@ const jsonLd = {
                 <script is:inline>
                     function runtime() {
                         const lastModifiedElement = document.getElementById('last-modified');
-                        if (!lastModifiedElement) return;  // 如果元素不存在，直接返回
+                        if (!lastModifiedElement) return;
                         
                         const startDate = new Date(lastModifiedElement.dataset.lastModified);
-                        const currentDate = new Date();
-                        const diff = currentDate - startDate;
-                        const seconds = Math.floor(diff / 1000);
-                        const days = Math.floor(seconds / 86400);
-                        const hours = Math.floor((seconds % 86400) / 3600);
-                        const minutes = Math.floor((seconds % 3600) / 60);
-                        const secs = seconds % 60;
-
-                        const years = Math.floor(days / 365);
-                        const months = Math.floor((days % 365) / 30);
-                        const remainingDays = days % 30;
+                        const year = startDate.getFullYear();
+                        const month = String(startDate.getMonth() + 1).padStart(2, '0');
+                        const day = String(startDate.getDate()).padStart(2, '0');
 
                         const prefix = lastModifiedElement.dataset.prefix;
                         const yearKey = lastModifiedElement.dataset.year;
                         const monthKey = lastModifiedElement.dataset.month;
                         const dayKey = lastModifiedElement.dataset.day;
-                        const hourKey = lastModifiedElement.dataset.hour;
-                        const minuteKey = lastModifiedElement.dataset.minute;
-                        const secondKey = lastModifiedElement.dataset.second;
 
-                        let runtimeString = prefix + ' ';
-                        if (years > 0) {
-                            runtimeString += `${years} ${yearKey} `;
-                        }
-                        if (months > 0) {
-                            runtimeString += `${months} ${monthKey} `;
-                        }
-                        if (remainingDays > 0) {
-                            runtimeString += `${remainingDays} ${dayKey} `;
-                        }
-                        runtimeString += `${hours} ${hourKey} `;
-                        if (minutes < 10) {
-                            runtimeString += `0${minutes} ${minuteKey} `;
-                        } else {
-                            runtimeString += `${minutes} ${minuteKey} `;
-                        }
-                        if (secs < 10) {
-                            runtimeString += `0${secs} ${secondKey}`;
-                        } else {
-                            runtimeString += `${secs} ${secondKey}`;
-                        }
+                        const runtimeString = `${prefix}${year} ${yearKey} ${month} ${monthKey} ${day} ${dayKey}`;
 
                         document.getElementById("modifiedtime").innerHTML = runtimeString;
                     }
-                    setInterval(runtime, 1000);
+                    runtime();
                 </script>
                 <div class="flex items-center gap-3">
                     <div class="flex items-center justify-center h-12 w-12 rounded-lg bg-[var(--enter-btn-bg)]">
