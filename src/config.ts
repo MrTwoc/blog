@@ -102,10 +102,10 @@ export const siteConfig: SiteConfig = {
 			enable: true,
 			// 要排除的分类名称数组（在此列出的分类将不显示在导航栏）
 			// 例如：["其他", "未分类"]
-			exclude: ["blog"],
+			exclude: ["blog","知识库"],
 			// 分类显示顺序，数组中的顺序即为显示顺序（未被包含的分类将按默认规则排在后面）
 			// 例如：["网络安全", "blog"] - 网络安全排第一，blog 排第二
-			order: ["网络安全"],
+			order: ["Rust","网络安全","wgpu"],
 			// 是否显示文章数量
 			showCount: false,
 		},
