@@ -13,6 +13,8 @@
 | 所在地 | 中国·山东·济南 |
 | GitHub | [MrTwoc](https://github.com/MrTwoc) |
 | Email | mrtwoc@qq.com |
+| QQ | 1191422391 |
+| 微信 | a1191422391 |
 
 ## 🎯 兴趣方向
 
