@@ -1,6 +1,6 @@
 ---
 title: "Mymq-rs[消息队列]"
-published: 2026-09-6
+published: 2026-09-06
 description: "自习 · Rust语言从零实现消息队列"
 image: "https://cdn.nlark.com/yuque/0/2026/png/1295434/1788695121516-3f2c10c3-447f-4761-bef8-d8b1abe21ca7.png"
 tags: [Rust、消息队列、tokio、quinn、protobuf、HTTP API]
