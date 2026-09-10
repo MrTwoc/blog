@@ -13,6 +13,8 @@ comment: true
 <!-- <img src="https://cdn.nlark.com/yuque/0/2026/png/1295434/1788695121516-3f2c10c3-447f-4761-bef8-d8b1abe21ca7.png" width="1920" title="" crop="0,0,1,1" id="ubb72a2a9" class="ne-image"> -->
 
 > 本项目计划从零实现一个消息队列，支持消息的生产者-消费者模型。
+教程为AI生成，仅用于学习参考。不涉及任何商业用途。<br>
+项目代码为手写，不使用AI生成。<br>
 
 **项目地址：** <https://github.com/MrTwoc/Mymq-rs>
 
